@@ -32,7 +32,7 @@ app.post("/api/v1", (req, res) => {
 
     let mailOptions = {
         from: data.email,
-        to: "ENTER_YOUR_EMAIL",
+        to: "michaelsavage940@gmail.com",
         subject: `${data.subject}`,
         html: `<p>${data.name}</p>
             <p>${data.email}</p>
