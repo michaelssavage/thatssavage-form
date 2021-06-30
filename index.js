@@ -30,9 +30,11 @@ app.post("/api/v1", (req, res) => {
         },
     });
 
+    console.log(data);
+
     let mailOptions = {
         from: data.email,
-        to: "michaelsavage119@hotmail.com@gmail.com",
+        to: "michaelsavage119@hotmail.com",
         subject: `${data.subject}`,
         html: `<p>${data.name}</p>
             <p>${data.email}</p>
