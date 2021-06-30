@@ -23,16 +23,16 @@ app.post("/api/v1", (req, res) => {
     let data = req.body;
 
     let smtpTransport = nodemailer.createTransport({
-        service: "Gmail",
+        service: "hotmail",
         auth: {
-        user: "michaelsavage940@gmail.com",
-        pass: "vy8YW7R2i4rhML5",
+        user: "michaelsavage119@hotmail.com",
+        pass: "03F12qlZ",
         },
     });
 
     let mailOptions = {
         from: data.email,
-        to: "michaelsavage940@gmail.com",
+        to: "michaelsavage119@hotmail.com@gmail.com",
         subject: `${data.subject}`,
         html: `<p>${data.name}</p>
             <p>${data.email}</p>
