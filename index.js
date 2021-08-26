@@ -2,21 +2,24 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const nodemailer = require("nodemailer");
-
 var cors = require('cors');
-app.use(cors());
-app.use(express.json());
 
-var allowlist = ['http://localhost:3000/','https://thatssavage.ie/']
-var corsOptionsDelegate = function (req, callback) {
-    var corsOptions;
-    if (allowlist.indexOf(req.header('Origin')) !== -1) {
-        corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-    } else {
-        corsOptions = { origin: false } // disable CORS for this request
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+        res.send(200);
     }
-    callback(null, corsOptions) // callback expects two parameters: error and options
-}
+    else {
+        next();
+    }
+};
+app.use(cors());
+app.use(allowCrossDomain);
+app.use(express.json());
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
@@ -27,8 +30,7 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html")
 })
 
-app.post("/", cors(corsOptionsDelegate), async (req, res) => {
-    console.log(req.body.name);
+app.post("/", async (req, res) => {
     const transporter = nodemailer.createTransport({
         host: "smtp.live.com",
         port: 587,
@@ -48,6 +50,7 @@ app.post("/", cors(corsOptionsDelegate), async (req, res) => {
 
     await transporter.sendMail(mailOptions, (error, info) => {
         if(error) {
+            console.log("Error sending Email..");
             res.send("error");
         } else {
             console.log("Email Sent!");
