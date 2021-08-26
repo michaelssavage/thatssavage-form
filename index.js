@@ -29,8 +29,8 @@ app.post("/", async (req, res) => {
     const mailOptions = {
         from: process.env.EMAIL,
         to: process.env.EMAIL,
-        subject: `Message on thatssavage.ie: ${req.body.email}`,
-        text: req.body.message + ",\n" + req.body.name 
+        subject: `THATSSAVAGE.IE Message: ${req.body.email}`,
+        text: `From ${req.body.email},\n\n${req.body.message}\n\n${req.body.name}`
     }
 
     await transporter.sendMail(mailOptions, (error, info) => {
