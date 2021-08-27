@@ -1,0 +1,42 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    background-color: #343a40;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+}
+
+.header {
+    font-size: 2.2em;
+    padding: 50px 50px;
+    color: #ffdd17;
+}
+h1:hover{
+    color: antiquewhite;
+}
+
+.paragraph {
+    font-size: 1.6em;
+    color: #ffdd17;
+}
+
+p:hover {
+    color: antiquewhite;
+}
+
+img {
+    width: 30%;
+}
+
+.logo-img {
+    width: 20%;
+}
+
+a {
+    text-decoration: none;
+    color: #ffdd17;
+}
